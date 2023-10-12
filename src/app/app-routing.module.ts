@@ -5,6 +5,7 @@ import { AuthGuard } from './helper/auth.guard';
 import { LoginComponent } from './main/components/login/login.component';
 import { NotFoundComponent } from './main/components/not-found/not-found.component';
 import { TodoComponent } from './main/components/todo/todo.component';
+import { ProfileComponent } from './main/components/profile/profile.component';
 
 const routes: Routes = [
 
@@ -17,9 +18,15 @@ const routes: Routes = [
         path: "tasks",
         component: TodoComponent,
         canActivate: [AuthGuard],
-      }
+      },
+      {
+        path: "profile",
+        component: ProfileComponent,
+        canActivate: [AuthGuard],
+      },
     ]
   },
+
   {
     path: "",
     pathMatch: 'full',

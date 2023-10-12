@@ -26,6 +26,11 @@ export class AuthService {
     return this.currentUserSubject.value;
   }
 
+  public set (user:any): any {
+      localStorage.setItem('user', btoa(JSON.stringify(user)));
+      this.currentUserSubject.next(user);
+  }
+
   loggedIn() {
     return !!localStorage.getItem('accessToken');
   }
@@ -70,6 +75,28 @@ export class AuthService {
       this.currentUserSubject.next(user.user);
       return user;
     }));
+
+  }
+
+  public updateUser(form:any,id:any) {
+
+    return this.http.post(environment.url + `user/update-image/${id}`,form,{
+      responseType: "json",
+   })
+
+  }
+  public updateUserInfo(form:any) {
+
+    return this.http.post(environment.url + `user/update-user`,form,{
+      responseType: "json",
+   })
+
+  }
+  public updatePassword(form:any,id:any) {
+
+    return this.http.post(environment.url + `user/update-password/${id}`,form,{
+      responseType: "json",
+   })
 
   }
 

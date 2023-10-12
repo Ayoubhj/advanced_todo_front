@@ -11,6 +11,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NotFoundComponent } from './main/components/not-found/not-found.component';
 import { TodoComponent } from './main/components/todo/todo.component';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+import { ProfileComponent } from './main/components/profile/profile.component';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
     DashboardComponent,
     NotFoundComponent,
     TodoComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,

@@ -17,13 +17,12 @@ export class DashboardComponent extends Unsubcriber implements OnInit{
   isClosed = false
   isClosedNotif = false
   currentuser : any
-  constructor(private todoService : TodoService,private auth : AuthService,private route : Router){
+  constructor(private todoService : TodoService,public auth : AuthService,private route : Router){
      super()
   }
   
   ngOnInit(): void {
-    this.currentuser = this.auth.userInfo
-    
+  
   }
 
 

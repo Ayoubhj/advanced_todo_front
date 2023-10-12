@@ -83,7 +83,7 @@
                         <div class="w-full flex items-center justify-between px-6 pt-1">
                             <div class="flex items-center">
                                 <img alt="profile-pic"
-                                    src="https://tuk-cdn.s3.amazonaws.com/assets/components/boxed_layout/bl_1.png"
+                                    src=""
                                     class="w-8 h-8 rounded-md" />
                                 <p class=" text-gray-800 text-base leading-4 ml-2">Jane Doe</p>
                             </div>
@@ -144,8 +144,9 @@
                         class="hover:text-indigo-700 cursor-pointer h-full flex items-center text-sm text-gry-800 mr-10 tracking-normal">
                         Performance</li>
                     <li
+                    routerLink="/dashboard/profile" routerLinkActive="text-indigo-500 border-indigo-700 border-b-2"
                         class="hover:text-indigo-700 cursor-pointer h-full flex items-center text-sm text-gray-800 tracking-normal">
-                        Deliverables</li>
+                        My Profile</li>
                 </ul>
             </div>
             <div class="h-full xl:flex items-center justify-end hidden">
@@ -156,10 +157,10 @@
                         <div aria-haspopup="true" class="cursor-pointer w-full flex items-center justify-end relative"
                             (click)="dropdownHandler()">
                             <ul *ngIf="isClosed"
-                                class="p-2 w-40 border-r bg-white absolute rounded z-40 left-0 shadow mt-64 ">
+                                class="p-2 w-40 border-r bg-white absolute rounded z-40 left-0 shadow mt-40 ">
                                 <li
                                     class="cursor-pointer text-gray-600 text-sm leading-3 tracking-normal py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
-                                    <div class="flex items-center">
+                                    <div class="flex items-center" routerLink="/dashboard/profile">
                                         <svg xmlns="http://www.w3.org/2000/svg"
                                             class="icon icon-tabler icon-tabler-user" width="20" height="20"
                                             viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"
@@ -171,52 +172,23 @@
                                         <span class="ml-2">My Profile</span>
                                     </div>
                                 </li>
-                                <li
-                                    class="cursor-pointer text-gray-600 text-sm leading-3 tracking-normal mt-2 py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none flex items-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-help"
-                                        width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5"
-                                        stroke="currentColor" fill="none" stroke-linecap="round"
-                                        stroke-linejoin="round">
-                                        <path stroke="none" d="M0 0h24v24H0z" />
-                                        <circle cx="12" cy="12" r="9" />
-                                        <line x1="12" y1="17" x2="12" y2="17.01" />
-                                        <path d="M12 13.5a1.5 1.5 0 0 1 1 -1.5a2.6 2.6 0 1 0 -3 -4" />
-                                    </svg>
-                                    <span class="ml-2">Help Center</span>
-                                </li>
-                                <li
-                                    class="cursor-pointer text-gray-600 text-sm leading-3 tracking-normal mt-2 py-2 hover:text-indigo-700 flex items-center focus:text-indigo-700 focus:outline-none">
-                                    <svg xmlns="http://www.w3.org/2000/svg"
-                                        class="icon icon-tabler icon-tabler-settings" width="20" height="20"
-                                        viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"
-                                        stroke-linecap="round" stroke-linejoin="round">
-                                        <path stroke="none" d="M0 0h24v24H0z" />
-                                        <path
-                                            d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
-                                        <circle cx="12" cy="12" r="3" />
-                                    </svg>
-                                    <span class="ml-2">Account Settings</span>
-                                </li>
+                            
+                             
                                 <li (click)="logout()"
-                                    class="cursor-pointer text-gray-600 text-sm leading-3 tracking-normal mt-2 py-2 hover:text-indigo-700 flex items-center focus:text-indigo-700 focus:outline-none">
-                                    <svg xmlns="http://www.w3.org/2000/svg"
-                                        class="icon icon-tabler icon-tabler-settings" width="20" height="20"
-                                        viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"
-                                        stroke-linecap="round" stroke-linejoin="round">
-                                        <path stroke="none" d="M0 0h24v24H0z" />
-                                        <path
-                                            d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
-                                        <circle cx="12" cy="12" r="3" />
-                                    </svg>
+                                    class="cursor-pointer text-gray-600 text-sm leading-3 tracking-normal mt-1 py-2 hover:text-indigo-700 flex items-center focus:text-indigo-700 focus:outline-none">
+                                    <svg width="18px" height="18px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M9.00195 7C9.01406 4.82497 9.11051 3.64706 9.87889 2.87868C10.7576 2 12.1718 2 15.0002 2L16.0002 2C18.8286 2 20.2429 2 21.1215 2.87868C22.0002 3.75736 22.0002 5.17157 22.0002 8L22.0002 16C22.0002 18.8284 22.0002 20.2426 21.1215 21.1213C20.2429 22 18.8286 22 16.0002 22H15.0002C12.1718 22 10.7576 22 9.87889 21.1213C9.11051 20.3529 9.01406 19.175 9.00195 17" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"/>
+                                        <path d="M15 12L2 12M2 12L5.5 9M2 12L5.5 15" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
                                     <span class="ml-2">Log out</span>
                                 </li>
                             </ul>
 
-                            <p class="text-gray-800 text-sm mr-2 capitalize font-semibold">{{ this.currentuser.firstName
-                                + " " + this.currentuser.lastName }}</p>
+                            <p class="text-gray-800 text-sm mr-2 capitalize font-semibold">{{ this.auth.userInfo.firstName
+                                + " " + this.auth.userInfo.lastName }}</p>
 
                             <img class="rounded h-10 w-10 object-cover"
-                                src="https://tuk-cdn.s3.amazonaws.com/assets/components/boxed_layout/bl_1.png"
+                                src="{{this.auth.userInfo.image}}"
                                 alt="logo" />
                         </div>
                     </div>

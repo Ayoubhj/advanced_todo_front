@@ -25,5 +25,8 @@ export class TodoService {
   deleteTodo(id : any){
     return this.http.delete(environment.url + `todo/delete/${id}`)
   }
-
+  markAsComplete(state : any,id : any){
+    return this.http.get(environment.url + `todo/mark/${state}/${id}`)
+  }
+  
 }

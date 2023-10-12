@@ -1,0 +1,228 @@
+<div class="container mx-auto grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 pt-6 gap-8">
+
+    <div>
+        <section class="bg-white ">
+            <div class="max-w-2xl px-4 py-8 mx-auto lg:py-16">
+                <h2 class="mb-4 text-xl font-bold text-gray-900 ">Update user information</h2>
+                <div class="flex flex-wrap items-end justify-start mb-4 gap-3">
+                    <div class="h-16 w-16">
+                        <img class="h-full w-full rounded-full object-cover object-center"
+                            src="{{this.currentuser.image}}" alt="" />
+                    </div>
+                    <input (change)="onChange($event)" type="file"
+                        class="file-input file-input-bordered file-input-xs  w-full max-w-xs" />
+                </div>
+                <form [formGroup]="formEdit" (ngSubmit)="OnSubmitUserInfo()">
+                    <div class="grid gap-4 mb-4 sm:grid-cols-2 sm:gap-6 sm:mb-5">
+                        <div class="w-full">
+                            <label for="brand" class="block mb-2 text-sm font-medium text-gray-900 ">First Name</label>
+                            <input type="text" formControlName="firstName" name="firstName" id="firstName"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+                                placeholder="First name" required="">
+                            <div class="text-red-500" *ngIf="firstName.errors?.['required'] && firstName.dirty  ">
+                                FirstName is reqiured
+                            </div>
+                        </div>
+
+                        <div class="w-full">
+                            <label for="price" class="block mb-2 text-sm font-medium text-gray-900 ">Last Name</label>
+                            <input type="text" formControlName="lastName" name="lastName" id="lastName"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
+                                placeholder="Last Name" required="">
+                            <div class="text-red-500" *ngIf="lastName.errors?.['required'] && lastName.dirty  ">
+                                LastName is reqiured
+                            </div>
+                        </div>
+
+
+                        <div class="sm:col-span-2">
+                            <label for="name" class="block mb-2 text-sm font-medium text-gray-900 ">Email</label>
+                            <input type="email" formControlName="email" name="email" id="email"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
+                                placeholder="Email" required="">
+                        </div>
+                        <div class="text-red-500" *ngIf="email.errors?.['required'] && email.dirty  ">
+                            Email is reqiured
+                        </div>
+                        <div class="text-red-500 w-[700px]"
+                            *ngIf="email.errors?.['pattern'] || email.errors?.['minlength']">
+                            Enter a valide email
+                        </div>
+                        <div class="sm:col-span-2">
+                            <label for="name" class="block mb-2 text-sm font-medium text-gray-900 ">Phone Number</label>
+                            <input type="text" formControlName="phone" name="phone" id="phone"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
+                                placeholder="Phone" required="">
+                        </div>
+                        <div class="text-red-500" *ngIf="phone.errors?.['required'] && phone.dirty  ">
+                            Phone number is reqiured
+                        </div>
+                        <div class="text-red-500 w-[700px]" *ngIf="phone.errors?.['pattern']">
+                            Enter a valide phone number
+                        </div>
+
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <button [disabled]="!formEdit.valid" type="submit"
+                            class="text-white bg-blue-500  hover:bg-blue-800  focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center ">
+                            Update profile
+                        </button>
+
+                    </div>
+                </form>
+            </div>
+        </section>
+    </div>
+    <div>
+        <section class="bg-white ">
+            <div class="py-8 px-4 mx-auto max-w-2xl lg:py-16">
+                <h2 class="mb-4 text-xl font-bold text-gray-900 ">Update password</h2>
+                <form [formGroup]="formPassword">
+                    <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
+
+                        <div class="relative sm:col-span-2 flex  flex-col justify-center">
+                            <label for="name" class="block mb-2 text-sm font-medium text-gray-900 ">Old Password</label>
+                            <input formControlName="oldPassword" [type]="passwordTextTypeOld ? 'text' : 'password'"
+                                name="name" id="name"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5  "
+                                placeholder="Password" required="">
+                            <button type="button" (click)="togglePasswordTextTypeOld()"
+                                class="absolute block right-4 mt-7">
+                                <svg *ngIf="!this.passwordTextTypeOld" class="svg" version="1.1"
+                                    xmlns="http://www.w3.org/2000/svg" width="22" viewBox="0 0 512 512"
+                                    xmlns:xlink="http://www.w3.org/1999/xlink" enable-background="new 0 0 512 512">
+                                    <g>
+                                        <g>
+                                            <path
+                                                d="m251.6,185.7c-36.9,0-67,31.5-67,70.3 0,38.7 30,70.3 67,70.3 36.9,0 67-31.5 67-70.3 0-38.7-30.1-70.3-67-70.3z" />
+                                            <path
+                                                d="m251.6,367.1c-59.4,0-107.8-49.8-107.8-111.1 0-61.3 48.4-111.1 107.8-111.1s107.8,49.8 107.8,111.1c0,61.3-48.4,111.1-107.8,111.1zm246.3-121.9c-63.8-102.4-149.8-158.8-241.9-158.8-92.1,0-178.1,56.4-241.9,158.8-4.1,6.6-4.1,15 0,21.6 63.8,102.4 149.8,158.8 241.9,158.8 92.1,0 178-56.4 241.9-158.8 4.1-6.6 4.1-15 0-21.6z" />
+                                        </g>
+                                    </g>
+                                </svg>
+                                <svg *ngIf="this.passwordTextTypeOld" width="22px" height="22px" viewBox="0 0 24 24"
+                                    fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                        d="M20.5303 4.53033C20.8232 4.23744 20.8232 3.76256 20.5303 3.46967C20.2374 3.17678 19.7626 3.17678 19.4697 3.46967L3.46967 19.4697C3.17678 19.7626 3.17678 20.2374 3.46967 20.5303C3.76256 20.8232 4.23744 20.8232 4.53033 20.5303L7.37723 17.6834C8.74353 18.3266 10.3172 18.75 12 18.75C14.684 18.75 17.0903 17.6729 18.8206 16.345C19.6874 15.6797 20.4032 14.9376 20.9089 14.2089C21.4006 13.5003 21.75 12.7227 21.75 12C21.75 11.2773 21.4006 10.4997 20.9089 9.79115C20.4032 9.06244 19.6874 8.32028 18.8206 7.65503C18.5585 7.45385 18.2808 7.25842 17.989 7.07163L20.5303 4.53033ZM16.8995 8.16113L15.1287 9.93196C15.5213 10.5248 15.75 11.2357 15.75 12C15.75 14.0711 14.0711 15.75 12 15.75C11.2357 15.75 10.5248 15.5213 9.93196 15.1287L8.51524 16.5454C9.58077 16.9795 10.7621 17.25 12 17.25C14.2865 17.25 16.3802 16.3271 17.9073 15.155C18.6692 14.5703 19.2714 13.9374 19.6766 13.3536C20.0957 12.7497 20.25 12.2773 20.25 12C20.25 11.7227 20.0957 11.2503 19.6766 10.6464C19.2714 10.0626 18.6692 9.42972 17.9073 8.84497C17.5941 8.60461 17.2571 8.37472 16.8995 8.16113ZM11.0299 14.0307C11.3237 14.1713 11.6526 14.25 12 14.25C13.2426 14.25 14.25 13.2426 14.25 12C14.25 11.6526 14.1713 11.3237 14.0307 11.0299L11.0299 14.0307Z"
+                                        fill="black" />
+                                    <path
+                                        d="M12 5.25C13.0323 5.25 14.0236 5.40934 14.9511 5.68101C15.1296 5.73328 15.1827 5.95662 15.0513 6.0881L14.2267 6.91265C14.1648 6.97451 14.0752 6.99928 13.99 6.97967C13.3506 6.83257 12.6839 6.75 12 6.75C9.71345 6.75 7.61978 7.67292 6.09267 8.84497C5.33078 9.42972 4.72857 10.0626 4.32343 10.6464C3.90431 11.2503 3.75 11.7227 3.75 12C3.75 12.2773 3.90431 12.7497 4.32343 13.3536C4.67725 13.8635 5.18138 14.4107 5.81091 14.9307C5.92677 15.0264 5.93781 15.2015 5.83156 15.3078L5.12265 16.0167C5.03234 16.107 4.88823 16.1149 4.79037 16.0329C4.09739 15.4517 3.51902 14.8255 3.0911 14.2089C2.59937 13.5003 2.25 12.7227 2.25 12C2.25 11.2773 2.59937 10.4997 3.0911 9.79115C3.59681 9.06244 4.31262 8.32028 5.17941 7.65503C6.90965 6.32708 9.31598 5.25 12 5.25Z"
+                                        fill="black" />
+                                    <path
+                                        d="M12 8.25C12.1185 8.25 12.2357 8.25549 12.3513 8.26624C12.5482 8.28453 12.6194 8.51991 12.4796 8.6597L11.2674 9.87196C10.6141 10.0968 10.0968 10.6141 9.87196 11.2674L8.6597 12.4796C8.51991 12.6194 8.28453 12.5482 8.26624 12.3513C8.25549 12.2357 8.25 12.1185 8.25 12C8.25 9.92893 9.92893 8.25 12 8.25Z"
+                                        fill="black" />
+                                </svg>
+
+                            </button>
+
+                        </div>
+                        <div class="text-red-500" *ngIf="old.errors?.['required'] && old.dirty ">
+                            password is reqiured
+                        </div>
+                        <div class="relative sm:col-span-2 flex  flex-col justify-center">
+                            <label for="newPassword" class="block mb-2 text-sm font-medium text-gray-900 ">New
+                                Password</label>
+                            <input formControlName="newPassword" [type]="passwordTextTypeNew ? 'text' : 'password'"
+                                name="name" id="name"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5  "
+                                placeholder="Password" required="">
+                            <button type="button" (click)="togglePasswordTextTypeNew()"
+                                class="absolute block right-4 mt-7">
+                                <svg *ngIf="!this.passwordTextTypeNew" class="svg" version="1.1"
+                                    xmlns="http://www.w3.org/2000/svg" width="22" viewBox="0 0 512 512"
+                                    xmlns:xlink="http://www.w3.org/1999/xlink" enable-background="new 0 0 512 512">
+                                    <g>
+                                        <g>
+                                            <path
+                                                d="m251.6,185.7c-36.9,0-67,31.5-67,70.3 0,38.7 30,70.3 67,70.3 36.9,0 67-31.5 67-70.3 0-38.7-30.1-70.3-67-70.3z" />
+                                            <path
+                                                d="m251.6,367.1c-59.4,0-107.8-49.8-107.8-111.1 0-61.3 48.4-111.1 107.8-111.1s107.8,49.8 107.8,111.1c0,61.3-48.4,111.1-107.8,111.1zm246.3-121.9c-63.8-102.4-149.8-158.8-241.9-158.8-92.1,0-178.1,56.4-241.9,158.8-4.1,6.6-4.1,15 0,21.6 63.8,102.4 149.8,158.8 241.9,158.8 92.1,0 178-56.4 241.9-158.8 4.1-6.6 4.1-15 0-21.6z" />
+                                        </g>
+                                    </g>
+                                </svg>
+                                <svg *ngIf="this.passwordTextTypeNew" width="22px" height="22px" viewBox="0 0 24 24"
+                                    fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                        d="M20.5303 4.53033C20.8232 4.23744 20.8232 3.76256 20.5303 3.46967C20.2374 3.17678 19.7626 3.17678 19.4697 3.46967L3.46967 19.4697C3.17678 19.7626 3.17678 20.2374 3.46967 20.5303C3.76256 20.8232 4.23744 20.8232 4.53033 20.5303L7.37723 17.6834C8.74353 18.3266 10.3172 18.75 12 18.75C14.684 18.75 17.0903 17.6729 18.8206 16.345C19.6874 15.6797 20.4032 14.9376 20.9089 14.2089C21.4006 13.5003 21.75 12.7227 21.75 12C21.75 11.2773 21.4006 10.4997 20.9089 9.79115C20.4032 9.06244 19.6874 8.32028 18.8206 7.65503C18.5585 7.45385 18.2808 7.25842 17.989 7.07163L20.5303 4.53033ZM16.8995 8.16113L15.1287 9.93196C15.5213 10.5248 15.75 11.2357 15.75 12C15.75 14.0711 14.0711 15.75 12 15.75C11.2357 15.75 10.5248 15.5213 9.93196 15.1287L8.51524 16.5454C9.58077 16.9795 10.7621 17.25 12 17.25C14.2865 17.25 16.3802 16.3271 17.9073 15.155C18.6692 14.5703 19.2714 13.9374 19.6766 13.3536C20.0957 12.7497 20.25 12.2773 20.25 12C20.25 11.7227 20.0957 11.2503 19.6766 10.6464C19.2714 10.0626 18.6692 9.42972 17.9073 8.84497C17.5941 8.60461 17.2571 8.37472 16.8995 8.16113ZM11.0299 14.0307C11.3237 14.1713 11.6526 14.25 12 14.25C13.2426 14.25 14.25 13.2426 14.25 12C14.25 11.6526 14.1713 11.3237 14.0307 11.0299L11.0299 14.0307Z"
+                                        fill="black" />
+                                    <path
+                                        d="M12 5.25C13.0323 5.25 14.0236 5.40934 14.9511 5.68101C15.1296 5.73328 15.1827 5.95662 15.0513 6.0881L14.2267 6.91265C14.1648 6.97451 14.0752 6.99928 13.99 6.97967C13.3506 6.83257 12.6839 6.75 12 6.75C9.71345 6.75 7.61978 7.67292 6.09267 8.84497C5.33078 9.42972 4.72857 10.0626 4.32343 10.6464C3.90431 11.2503 3.75 11.7227 3.75 12C3.75 12.2773 3.90431 12.7497 4.32343 13.3536C4.67725 13.8635 5.18138 14.4107 5.81091 14.9307C5.92677 15.0264 5.93781 15.2015 5.83156 15.3078L5.12265 16.0167C5.03234 16.107 4.88823 16.1149 4.79037 16.0329C4.09739 15.4517 3.51902 14.8255 3.0911 14.2089C2.59937 13.5003 2.25 12.7227 2.25 12C2.25 11.2773 2.59937 10.4997 3.0911 9.79115C3.59681 9.06244 4.31262 8.32028 5.17941 7.65503C6.90965 6.32708 9.31598 5.25 12 5.25Z"
+                                        fill="black" />
+                                    <path
+                                        d="M12 8.25C12.1185 8.25 12.2357 8.25549 12.3513 8.26624C12.5482 8.28453 12.6194 8.51991 12.4796 8.6597L11.2674 9.87196C10.6141 10.0968 10.0968 10.6141 9.87196 11.2674L8.6597 12.4796C8.51991 12.6194 8.28453 12.5482 8.26624 12.3513C8.25549 12.2357 8.25 12.1185 8.25 12C8.25 9.92893 9.92893 8.25 12 8.25Z"
+                                        fill="black" />
+                                </svg>
+
+                            </button>
+                        </div>
+                        <div class="text-red-500" *ngIf="new.errors?.['required'] && new.dirty  ">
+                            New password is reqiured
+                        </div>
+                        <div class="text-red-500 w-[700px]"
+                            *ngIf="new.errors?.['pattern'] || new.errors?.['minlength']">
+                            Password must contain at least one number, one uppercase and a
+                            lowercase letter and at least 8 characters<br />Password cannot
+                            contain whitespace
+                        </div>
+                        <div class="relative sm:col-span-2 flex  flex-col justify-center">
+                            <label for="name" class="block mb-2 text-sm font-medium text-gray-900 ">Confirmation
+                                password
+                            </label>
+                            <input formControlName="confirmPassword"
+                                [type]="passwordTextTypeRetype ? 'text' : 'password'" name="name" id="name"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5  "
+                                placeholder="Password confirmation" required="">
+                            <button type="button" (click)="togglePasswordTextTypeRetype()"
+                                class="absolute block right-4 mt-7">
+                                <svg *ngIf="!this.passwordTextTypeRetype" class="svg" version="1.1"
+                                    xmlns="http://www.w3.org/2000/svg" width="22" viewBox="0 0 512 512"
+                                    xmlns:xlink="http://www.w3.org/1999/xlink" enable-background="new 0 0 512 512">
+                                    <g>
+                                        <g>
+                                            <path
+                                                d="m251.6,185.7c-36.9,0-67,31.5-67,70.3 0,38.7 30,70.3 67,70.3 36.9,0 67-31.5 67-70.3 0-38.7-30.1-70.3-67-70.3z" />
+                                            <path
+                                                d="m251.6,367.1c-59.4,0-107.8-49.8-107.8-111.1 0-61.3 48.4-111.1 107.8-111.1s107.8,49.8 107.8,111.1c0,61.3-48.4,111.1-107.8,111.1zm246.3-121.9c-63.8-102.4-149.8-158.8-241.9-158.8-92.1,0-178.1,56.4-241.9,158.8-4.1,6.6-4.1,15 0,21.6 63.8,102.4 149.8,158.8 241.9,158.8 92.1,0 178-56.4 241.9-158.8 4.1-6.6 4.1-15 0-21.6z" />
+                                        </g>
+                                    </g>
+                                </svg>
+                                <svg *ngIf="this.passwordTextTypeRetype" width="22px" height="22px" viewBox="0 0 24 24"
+                                    fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                        d="M20.5303 4.53033C20.8232 4.23744 20.8232 3.76256 20.5303 3.46967C20.2374 3.17678 19.7626 3.17678 19.4697 3.46967L3.46967 19.4697C3.17678 19.7626 3.17678 20.2374 3.46967 20.5303C3.76256 20.8232 4.23744 20.8232 4.53033 20.5303L7.37723 17.6834C8.74353 18.3266 10.3172 18.75 12 18.75C14.684 18.75 17.0903 17.6729 18.8206 16.345C19.6874 15.6797 20.4032 14.9376 20.9089 14.2089C21.4006 13.5003 21.75 12.7227 21.75 12C21.75 11.2773 21.4006 10.4997 20.9089 9.79115C20.4032 9.06244 19.6874 8.32028 18.8206 7.65503C18.5585 7.45385 18.2808 7.25842 17.989 7.07163L20.5303 4.53033ZM16.8995 8.16113L15.1287 9.93196C15.5213 10.5248 15.75 11.2357 15.75 12C15.75 14.0711 14.0711 15.75 12 15.75C11.2357 15.75 10.5248 15.5213 9.93196 15.1287L8.51524 16.5454C9.58077 16.9795 10.7621 17.25 12 17.25C14.2865 17.25 16.3802 16.3271 17.9073 15.155C18.6692 14.5703 19.2714 13.9374 19.6766 13.3536C20.0957 12.7497 20.25 12.2773 20.25 12C20.25 11.7227 20.0957 11.2503 19.6766 10.6464C19.2714 10.0626 18.6692 9.42972 17.9073 8.84497C17.5941 8.60461 17.2571 8.37472 16.8995 8.16113ZM11.0299 14.0307C11.3237 14.1713 11.6526 14.25 12 14.25C13.2426 14.25 14.25 13.2426 14.25 12C14.25 11.6526 14.1713 11.3237 14.0307 11.0299L11.0299 14.0307Z"
+                                        fill="black" />
+                                    <path
+                                        d="M12 5.25C13.0323 5.25 14.0236 5.40934 14.9511 5.68101C15.1296 5.73328 15.1827 5.95662 15.0513 6.0881L14.2267 6.91265C14.1648 6.97451 14.0752 6.99928 13.99 6.97967C13.3506 6.83257 12.6839 6.75 12 6.75C9.71345 6.75 7.61978 7.67292 6.09267 8.84497C5.33078 9.42972 4.72857 10.0626 4.32343 10.6464C3.90431 11.2503 3.75 11.7227 3.75 12C3.75 12.2773 3.90431 12.7497 4.32343 13.3536C4.67725 13.8635 5.18138 14.4107 5.81091 14.9307C5.92677 15.0264 5.93781 15.2015 5.83156 15.3078L5.12265 16.0167C5.03234 16.107 4.88823 16.1149 4.79037 16.0329C4.09739 15.4517 3.51902 14.8255 3.0911 14.2089C2.59937 13.5003 2.25 12.7227 2.25 12C2.25 11.2773 2.59937 10.4997 3.0911 9.79115C3.59681 9.06244 4.31262 8.32028 5.17941 7.65503C6.90965 6.32708 9.31598 5.25 12 5.25Z"
+                                        fill="black" />
+                                    <path
+                                        d="M12 8.25C12.1185 8.25 12.2357 8.25549 12.3513 8.26624C12.5482 8.28453 12.6194 8.51991 12.4796 8.6597L11.2674 9.87196C10.6141 10.0968 10.0968 10.6141 9.87196 11.2674L8.6597 12.4796C8.51991 12.6194 8.28453 12.5482 8.26624 12.3513C8.25549 12.2357 8.25 12.1185 8.25 12C8.25 9.92893 9.92893 8.25 12 8.25Z"
+                                        fill="black" />
+                                </svg>
+
+                            </button>
+                        </div>
+                        <div class="text-red-500" *ngIf="confirmNew.errors?.['required'] && confirmNew.dirty  ">
+                            Confirmation password is reqiured
+                        </div>
+
+                        <div class="text-red-500" *ngIf="confirmNew.errors?.['confirmedValidator']">
+                            Password must equal to new password
+                        </div>
+                        <div class="text-red-500 w-[700px]"
+                            *ngIf="confirmNew.errors?.['pattern'] || confirmNew.errors?.['minlength']">
+                            Password must contain at least one number, one uppercase and a
+                            lowercase letter and at least 8 characters<br />Password cannot
+                            contain whitespace
+                        </div>
+                    </div>
+                    <button type="submit" [disabled]="!formPassword.valid" (click)="OnSubmitPassword()"
+                        class="inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-blue-500  rounded-lg focus:ring-4 focus:ring-primary-200  hover:bg-blue-800 ">
+                        Update
+                    </button>
+                </form>
+            </div>
+        </section>
+    </div>
+
+
+</div>

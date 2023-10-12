@@ -2,14 +2,12 @@
     <div class="sm:flex sm:items-center sm:justify-between">
         <div>
             <div class="flex items-center gap-x-3">
-                <h2 class="text-lg font-medium text-gray-800 ">Customers</h2>
+                <h2 class="text-lg font-medium text-gray-800 ">Tasks List</h2>
 
-                <span class="px-3 py-1 text-xs text-blue-600 bg-blue-100 rounded-full ">240
-                    vendors</span>
+                <span class="px-3 py-1 text-xs text-blue-600 bg-blue-100 rounded-full ">{{ todos.length }} todo</span>
             </div>
 
-            <p class="mt-1 text-sm text-gray-500 ">These companies have purchased in the last 12
-                months.</p>
+
         </div>
 
         <div class="flex items-center mt-4 gap-x-3">
@@ -23,27 +21,27 @@
                         d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
 
-                <span>Add Todo</span>
+                <span>Add Task</span>
             </button>
         </div>
     </div>
 
     <div class="mt-6 md:flex md:items-center md:justify-between">
         <div class="inline-flex overflow-hidden bg-white border divide-x rounded-lg ">
-            <button
-                class="px-5 py-2 text-xs font-medium text-gray-600 transition-colors duration-200 bg-gray-100 sm:text-sm ">
+            <button (click)="switch(all)" [ngClass]="all ==  currentState ? 'bg-gray-100' : '' "
+                class="px-5 py-2 text-xs font-medium text-gray-600 transition-colors duration-200  sm:text-sm hover:bg-gray-100">
                 View all
             </button>
-
-            <button
+            <button (click)="switch(notDone)" [ngClass]="notDone ==  currentState ? 'bg-gray-100' : '' "
                 class="px-5 py-2 text-xs font-medium text-gray-600 transition-colors duration-200 sm:text-sm  hover:bg-gray-100">
-                Monitored
+                Not Done
+            </button>
+            <button (click)="switch(done)" [ngClass]="done ==  currentState ? 'bg-gray-100' : '' "
+                class="px-5 py-2 text-xs font-medium text-gray-600 transition-colors duration-200 sm:text-sm  hover:bg-gray-100">
+                Done
             </button>
 
-            <button
-                class="px-5 py-2 text-xs font-medium text-gray-600 transition-colors duration-200 sm:text-sm  hover:bg-gray-100">
-                Unmonitored
-            </button>
+
         </div>
 
         <div class="relative flex items-center mt-4 md:mt-0">
@@ -96,10 +94,28 @@
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200 ">
                             <tr *ngFor="let todo of this.todos ; let index = index">
-                                <td class="text-center"> 
-                                    <label>
-                                        <input type="checkbox" class="checkbox" />
-                                    </label>
+                                <td class="text-center">
+
+                                    <button *ngIf="todo.isDone == 1" (click)="markAsComplete(0,todo.id)"
+                                        class="flex items-center justify-center w-1/2 px-5 py-2 ml-16 text-sm tracking-wide  transition-colors duration-200 text-emerald-400  bg-emerald-100/60 rounded-lg shrink-0 sm:w-auto gap-x-2 hover:bg-emerald-100  ">
+                                        <svg width="18px" height="18px" viewBox="0 0 24 24" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M4 12.6111L8.92308 17.5L20 6.5" stroke="#67D3AF" stroke-width="2"
+                                                stroke-linecap="round" stroke-linejoin="round" />
+                                        </svg>
+
+                                    </button>
+                                    <button (click)="markAsComplete(1,todo.id)" *ngIf="todo.isDone == 0"
+                                        class="flex items-center justify-center w-1/2 px-5 py-2 ml-16 text-sm tracking-wide text-white transition-colors duration-200 bg-orange-300 rounded-lg shrink-0 sm:w-auto gap-x-2 hover:bg-orange-400 ">
+
+                                        <svg fill="#ffffff" width="18px" height="18px" viewBox="0 0 32 32" version="1.1"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <title>Not Completed Yet</title>
+                                            <path stroke="#ffffff"
+                                                d="M17.769 16l9.016-9.016c0.226-0.226 0.366-0.539 0.366-0.884 0-0.691-0.56-1.251-1.251-1.251-0.346 0-0.658 0.14-0.885 0.367v0l-9.015 9.015-9.016-9.015c-0.226-0.226-0.539-0.366-0.884-0.366-0.69 0-1.25 0.56-1.25 1.25 0 0.345 0.14 0.658 0.366 0.884v0l9.015 9.016-9.015 9.015c-0.227 0.226-0.367 0.539-0.367 0.885 0 0.691 0.56 1.251 1.251 1.251 0.345 0 0.658-0.14 0.884-0.366v0l9.016-9.016 9.015 9.016c0.227 0.228 0.541 0.369 0.888 0.369 0.691 0 1.251-0.56 1.251-1.251 0-0.347-0.141-0.661-0.369-0.887l-0-0z">
+                                            </path>
+                                        </svg>
+                                    </button>
                                 </td>
                                 <td class="px-4 py-4 text-sm font-medium ">
                                     <div>
@@ -222,8 +238,7 @@
 
                                 <td class="px-4 py-4 text-sm whitespace-nowrap">
                                     <div class="flex items-center gap-x-6">
-                                        <button
-                                        (click)="deleteTodo(todo)"
+                                        <button (click)="deleteTodo(todo)"
                                             class="text-gray-500 transition-colors duration-200   hover:text-red-500 focus:outline-none">
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                                 stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
@@ -291,7 +306,7 @@
 <dialog id="my_modal_1" class="modal">
     <div class="modal-box">
         <div class="flex items-center justify-between">
-            <h3 class="font-bold text-lg">Add todo</h3>
+            <h3 class="font-bold text-lg">Add task</h3>
             <div>
                 <form method="dialog">
                     <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
@@ -330,7 +345,7 @@
 <dialog id="my_modal_2" class="modal">
     <div class="modal-box">
         <div class="flex items-center justify-between">
-            <h3 class="font-bold text-lg">Edit todo</h3>
+            <h3 class="font-bold text-lg">Edit task</h3>
             <div>
                 <form method="dialog">
                     <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>

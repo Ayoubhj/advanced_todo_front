@@ -18,6 +18,10 @@ export class TodoComponent extends Unsubcriber implements OnInit {
    searchForm: FormGroup;
    searchText : string =  ""
    descreption: string = "";
+   done = 1;
+   notDone = 0;
+   all = 2;
+   currentState = 2;
    todo: any;
    totalPages = 0
    pagenation = {
@@ -38,6 +42,7 @@ export class TodoComponent extends Unsubcriber implements OnInit {
       })
       this.searchForm = this.fb.group({
          search: ["", [Validators.min(3), Validators.max(255)]],
+         state: [2, [Validators.min(3), Validators.max(255)]],
       })
    }
 
@@ -70,11 +75,12 @@ export class TodoComponent extends Unsubcriber implements OnInit {
    addTodo() {
       this.todoService.createTodo(this.formAdd.value).subscribe(todo => {
          Swal.fire({
-            title: 'Added Successfuly',
-            text: 'Todo element added successfuly',
+            title: 'Added successfully',
+            text: 'Task element added successfully',
             icon: "success",
             confirmButtonText: 'Ok',
-            confirmButtonColor : "rgb(59,130,246)"
+            confirmButtonColor : "#34D399",
+            
           });
          this.getData()
       })
@@ -82,11 +88,11 @@ export class TodoComponent extends Unsubcriber implements OnInit {
    editTodo() {
       this.todoService.updateTodo(this.formEdit.value, this.todo.id).subscribe(todo => {
          Swal.fire({
-            title: 'Updated Successfuly',
-            text: 'Todo element updated successfuly',
+            title: 'Updated successfully',
+            text: 'Task element updated successfully',
             icon: "success",
             confirmButtonText: 'Ok',
-            confirmButtonColor : "rgb(59,130,246)"
+            confirmButtonColor : "#34D399"
           });
          this.getData()
       })
@@ -108,14 +114,14 @@ export class TodoComponent extends Unsubcriber implements OnInit {
       const swalWithBootstrapButtons = Swal.mixin({
           
           cancelButtonColor : "",
-          confirmButtonColor : "rgb(59,130,246)"
+          confirmButtonColor : "#34D399"
         
        });
        swalWithBootstrapButtons.fire(
        {
          showCloseButton: true,
          title: 'Delete todo',
-         text: 'Are you sure you want to dlete this todo',
+         text: 'Are you sure you want to delete this task',
          showCancelButton: true,
          confirmButtonText: 'Yes',
          icon: "info",
@@ -126,16 +132,50 @@ export class TodoComponent extends Unsubcriber implements OnInit {
          if (result.value) {
             this.anotherSubscription = this.todoService.deleteTodo(todo.id).subscribe(res => {
                Swal.fire({
-                  title: 'Deleted Successfuly',
-                  text: 'Todo element deleted successfuly',
+                  title: 'Deleted successfully',
+                  text: 'Task element deleted successfully',
                   icon: "success",
                   confirmButtonText: 'Ok',
-                  confirmButtonColor : "rgb(59,130,246)"
+                  confirmButtonColor : "#34D399"
                 });
                this.getData()
             })
          }
        });
+   }
+
+   markAsComplete(state:any,id:any){
+      this.anotherSubscription = this.todoService.markAsComplete(state,id).subscribe((res:any) => {
+         if(res.isDone == 1 ){
+            Swal.fire({
+               title: '',
+               text: 'Task processed successfully',
+               icon: "success",
+               confirmButtonText: 'Ok',
+               confirmButtonColor : "#34D399",
+               allowOutsideClick: false
+
+             });
+         }else{
+            Swal.fire({
+               title: '',
+               text: 'Task undo successfully',
+               icon: "success",
+               confirmButtonText: 'Ok',
+               confirmButtonColor : "#34D399",
+               allowOutsideClick: false
+
+             });
+         }
+         
+         this.getData()
+      })
+   }
+
+   switch(state:any){
+      this.searchForm.controls["state"].setValue(state);
+      this.currentState = state
+      this.getData()
    }
 }
 
